@@ -3,9 +3,7 @@ package guru.qa;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,10 +30,22 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Количество найденных слов - " + sufferList.size());
+        System.out.println("Количество найденных слов - " + sufferList.size() + System.lineSeparator());
         System.out.println("Найденные слова: ");
-        System.out.println(Arrays.toString(sufferList.toArray()));
 
+        Map<String, Integer> wordsCount = new HashMap<>();
 
+        for (String word : sufferList) {
+            if (!wordsCount.containsKey(word)) {
+                wordsCount.put(word, 1);
+            } else {
+                Integer integer = wordsCount.get(word);
+                wordsCount.put(word, integer + 1);
+            }
+        }
+
+        for (Map.Entry<String, Integer> entry : wordsCount.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+        }
     }
 }
