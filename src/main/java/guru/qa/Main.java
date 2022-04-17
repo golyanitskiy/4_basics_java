@@ -3,7 +3,10 @@ package guru.qa;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,8 +47,8 @@ public class Main {
             }
         }
 
-        for (Map.Entry<String, Integer> entry : wordsCount.entrySet()) {
-            System.out.println(entry.getKey() + " - " + entry.getValue());
-        }
+        wordsCount.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEach(e -> System.out.println(e.getKey() + " - " + e.getValue()));
     }
 }
